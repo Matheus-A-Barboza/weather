@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const apiKey = "8bccd4e996a04d2488f221407241104"; // Substitua pelo sua chave de API
+    const apiKey = "8bccd4e996a04d2488f221407241104"; // Substitua pela sua chave de API
     const searchBtn = document.getElementById("search-btn");
 
     searchBtn.addEventListener("click", () => {
@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(data => {
                 displayWeather(data);
             })
+            .catch(error => {
+                console.error("Erro ao buscar dados:", error);
+            });
     });
 
     function displayWeather(data) {
@@ -23,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("wind-speed").textContent = `Velocidade do Vento: ${data.current.wind_kph} km/h`;
         document.getElementById("condition").textContent = `Condição: ${data.current.condition.text}`;
         
-        const icon = document.getElementById("weather-icon");
-        icon.innerHTML = `<img src="${data.current.condition.icon}" alt="${data.current.condition.text}">`;
+        const weatherImg = document.getElementById("weather-icon");
+        weatherImg.innerHTML = `<img src="${data.current.condition.icon}" alt="${data.current.condition.text}">`;
     }
 });
